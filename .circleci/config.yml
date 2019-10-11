@@ -1,6 +1,18 @@
 version: 2
 jobs:
   build:
+    machine: true
+    working_directory: /app
+    steps:
+      - checkout
+      - run:
+          name: get new version
+          command: |
+            echo 'export VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)' >> $BASH_ENV
+            echo $VERSION
+            source $BASH_ENV
+
+  build:
     docker:
       # specify the version you desire here
       - image: circleci/openjdk:8-jdk
@@ -19,11 +31,6 @@ jobs:
 
     steps:
       - checkout
-
-      - run:
-          name: get new version
-          command: |
-            export VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)
 
       - run: ./gradlew build jar
 
