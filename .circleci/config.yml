@@ -10,6 +10,7 @@ jobs:
           command: |
             NEW_VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)
             echo $NEW_VERSION
+            mkdir workspace
             echo $NEW_VERSION > workspace/version
       - persist_to_workspace:
           root: workspace
