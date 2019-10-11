@@ -36,6 +36,9 @@ jobs:
 
     steps:
       - checkout
+      
+      - attach_workspace:
+          at: /tmp/workspace
 
       - run:
           name: get new version
