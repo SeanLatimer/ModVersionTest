@@ -8,9 +8,8 @@ jobs:
       - run:
           name: get new version
           command: |
-            echo 'export VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)' >> $BASH_ENV
-            echo $VERSION
-            source $BASH_ENV
+            NEW_VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)
+            echo $NEW_VERSION
 
   build:
     docker:
