@@ -10,9 +10,7 @@ jobs:
           command: |
             NEW_VERSION=$(docker run --rm -v $(pwd):/repo codacy/git-version)
             echo $NEW_VERSION
-            echo 'export VERSION=$NEW_VERSION' >> $BASH_ENV
-            source $BASH_ENV
-            echo $(NEW_VERSION) > workspace/version
+            echo $NEW_VERSION > workspace/version
       - persist_to_workspace:
           root: workspace
           paths:
